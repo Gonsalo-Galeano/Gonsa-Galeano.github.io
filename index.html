@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oma Sahumerios</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cream: #F5EFE4;
+    --brown: #8B5E3C;
+    --brown-dark: #5C3D1E;
+    --brown-light: #C49A6C;
+    --green: #5C7A4E;
+    --green-light: #7A9E6A;
+    --sand: #E8D8C0;
+    --text: #3A2A1A;
+    --text-muted: #7A6050;
+    --white: #FFFDF8;
+  }
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--cream);
+    color: var(--text);
+  }
+
+  /* HEADER */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--sand);
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .logo-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--brown-dark);
+    letter-spacing: 0.5px;
+  }
+  .logo-text span {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .whatsapp-btn:hover { background: #1ebe5a; }
+  .whatsapp-btn svg { width: 18px; height: 18px; fill: white; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--brown-dark) 0%, #7A4A2A 60%, var(--brown) 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(196,154,108,0.15);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -30px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(92,122,78,0.12);
+  }
+  .hero-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--white);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .hero h2 em {
+    font-style: italic;
+    color: var(--brown-light);
+  }
+  .hero p {
+    color: rgba(255,253,248,0.75);
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  /* CATEGORIES FILTER */
+  .filter-bar {
+    background: var(--white); 
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--sand);
+    justify-content: center;
+  }
+  .filter-btn {
+    padding: 0.4rem 1.1rem;
+    border-radius: 20px;
+    border: 1.5px solid var(--sand);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .filter-btn:hover {
+    border-color: var(--brown-light);
+    color: var(--brown);
+  }
+  .filter-btn.active {
+    background: var(--brown);
+    border-color: var(--brown);
+    color: var(--white);
+  }
+
+  /* PRODUCTS GRID */
+  .catalog-section {
+    padding: 2.5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--brown-dark);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  .section-line {
+    width: 50px;
+    height: 2px;
+    background: var(--brown-light);
+    margin-bottom: 1.8rem;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--sand);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(90,50,20,0.12);
+  }
+  .product-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-img .img-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    background-image: repeating-linear-gradient(
+      45deg,
+      var(--brown-light) 0px,
+      var(--brown-light) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  }
+  .product-emoji {
+    font-size: 3.2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 1;
+  }
+  .product-cat-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--brown);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 10px;
+    z-index: 2;
+  }
+  .product-info {
+    padding: 1rem;
+  }
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--brown-dark);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  .product-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-price {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--brown);
+  }
+  .consult-btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .consult-btn:hover { background: var(--green-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--brown-dark);
+    color: rgba(255,253,248,0.7);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  footer strong {
+    color: var(--brown-light);
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+  }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <!-- Para usar tu logo real, reemplazá el SVG por: <img src="tu-logo.png" alt="Oma Sahumerios"> -->
+    <div class="logo-circle">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="52" height="52">
+        <rect width="100" height="100" fill="#E8D8C0"/>
+        <path d="M50 20 Q70 25 68 45 Q66 60 50 65 Q34 60 32 45 Q30 25 50 20Z" fill="none" stroke="#8B5E3C" stroke-width="2.5"/>
+        <path d="M36 38 Q30 30 35 24 Q42 18 50 20" fill="none" stroke="#5C7A4E" stroke-width="2.5"/>
+        <path d="M36 38 Q28 36 26 30 Q24 22 32 20" fill="#5C7A4E" opacity="0.7"/>
+        <path d="M52 18 Q58 12 64 16 Q68 20 62 24" fill="#5C7A4E" opacity="0.5"/>
+        <text x="50" y="88" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#8B5E3C" font-weight="600">Oma</text>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <h1>Oma</h1>
+      <span>sahumerios & deco</span>
+    </div>
+  </div>
+  <a class="whatsapp-btn" href="https://wa.me/542478521631" target="_blank">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Consultar
+  </a>
+</header>
+
+<div class="hero">
+  <p class="hero-subtitle">✦ Tienda Online ✦</p>
+  <h2>Aromas que <em>transforman</em><br>tu espacio</h2>
+  <p>Sahumerios artesanales, decoración y bijouterie para llenar tu hogar de energía y bienestar</p>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterProducts('todos', this)">Todos</button>
+  <button class="filter-btn" onclick="filterProducts('sahumerios', this)">Sahumerios</button>
+  <button class="filter-btn" onclick="filterProducts('deco', this)">Decoración</button>
+  <button class="filter-btn" onclick="filterProducts('aromatizantes', this)">Aromatizantes</button>
+  <button class="filter-btn" onclick="filterProducts('bijouterie', this)">Bijouterie</button>
+</div>
+
+<div class="catalog-section">
+  <div class="section-title">Nuestros productos</div>
+  <div class="section-line"></div>
+
+  <div class="products-grid" id="products-grid">
+
+    <!-- ============================================
+         PRODUCTOS - Para agregar uno nuevo, copiá
+         un bloque .product-card y editá los datos.
+         
+         data-cat puede ser:
+           sahumerios | deco | aromatizantes | bijouterie
+         
+         Para usar foto real, reemplazá el emoji por:
+         <img src="foto-producto.jpg" alt="nombre">
+         ============================================ -->
+
+    <div class="product-card" data-cat="sahumerios">
+      <div class="product-img" style="background:#EDD9C0;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">🌿</span>
+        <span class="product-cat-badge">Sahumerios</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Sahumerio de Lavanda</div>
+        <div class="product-desc">Esencias relajantes para calmar la mente y el espacio</div>
+        <div class="product-footer">
+          <span class="product-price">$12.000</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20el%20Sahumerio%20de%20Lavanda" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="sahumerios">
+      <div class="product-img" style="background:#DDE4D0;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">🔥</span>
+        <span class="product-cat-badge">Sahumerios</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Palo Santo</div>
+        <div class="product-desc">Purifica ambientes y atrae energía positiva al hogar</div>
+        <div class="product-footer">
+          <span class="product-price">$900</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20el%20Palo%20Santo" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="sahumerios">
+      <div class="product-img" style="background:#F0E0CC;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">🌸</span>
+        <span class="product-cat-badge">Sahumerios</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Caja Surtida x10</div>
+        <div class="product-desc">Mix de fragancias seleccionadas para cada momento del día</div>
+        <div class="product-footer">
+          <span class="product-price">$2.800</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20la%20Caja%20Surtida" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="deco">
+      <div class="product-img" style="background:#E8D4BA;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">🏺</span>
+        <span class="product-cat-badge">Deco</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Portasahumerio Madera</div>
+        <div class="product-desc">Tallado artesanal, diseño único para tu mesa o repisa</div>
+        <div class="product-footer">
+          <span class="product-price">$3.500</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20el%20Portasahumerio" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="deco">
+      <div class="product-img" style="background:#D9CFC4;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">🪨</span>
+        <span class="product-cat-badge">Deco</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Crystales y Piedras</div>
+        <div class="product-desc">Amatista, cuarzo rosa y más para decorar con intención</div>
+        <div class="product-footer">
+          <span class="product-price">$2.200</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20Crystales%20y%20Piedras" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="aromatizantes">
+      <div class="product-img" style="background:#EDE0D0;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">🕯️</span>
+        <span class="product-cat-badge">Aromatizantes</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Vela Aromática</div>
+        <div class="product-desc">Cera de soja con esencias naturales, larga duración</div>
+        <div class="product-footer">
+          <span class="product-price">$4.500</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20la%20Vela%20Aromatica" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="aromatizantes">
+      <div class="product-img" style="background:#D8E0D4;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">🌺</span>
+        <span class="product-cat-badge">Aromatizantes</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Difusor de Varillas</div>
+        <div class="product-desc">Fragancia suave y continua para ambientes del hogar</div>
+        <div class="product-footer">
+          <span class="product-price">$5.800</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20el%20Difusor%20de%20Varillas" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="bijouterie">
+      <div class="product-img" style="background:#E8D8C8;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">📿</span>
+        <span class="product-cat-badge">Bijouterie</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Collar de Piedras</div>
+        <div class="product-desc">Diseño artesanal con piedras semipreciosas naturales</div>
+        <div class="product-footer">
+          <span class="product-price">$6.500</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20el%20Collar%20de%20Piedras" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="bijouterie">
+      <div class="product-img" style="background:#E0D4E8;">
+        <div class="img-pattern"></div>
+        <span class="product-emoji">✨</span>
+        <span class="product-cat-badge">Bijouterie</span>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Pulsera Energética</div>
+        <div class="product-desc">Combinación de colores y cristales con significado</div>
+        <div class="product-footer">
+          <span class="product-price">$3.200</span>
+          <a class="consult-btn" href="https://wa.me/542478521631?text=Hola!%20me%20interesa%20la%20Pulsera%20Energetica" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>Oma Sahumerios</strong><br><br>
+  Todos los productos son artesanales y con amor 🌿<br>
+  Consultas por WhatsApp · Envíos a todo el país
+</footer>
+
+<script>
+function filterProducts(cat, btn) {
+  const cards = document.querySelectorAll('.product-card');
+  const btns = document.querySelectorAll('.filter-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  cards.forEach(card => {
+    if (cat === 'todos' || card.dataset.cat === cat) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
